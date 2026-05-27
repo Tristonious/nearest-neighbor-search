@@ -34,31 +34,30 @@ The original `pop` idea in the pseudocomment (pop x from the sorted list) — di
 
 ---
 
-## k-D Tree — TODO
+## k-D Tree — Implemented
 
-Still need to implement:
+`KDTree` is implemented in `src/kdtree.py` as a class wrapping `KDNode`.
 
-- `KDTree.build(points)` — recursive construction, splitting on the axis of highest variance at each level
-- `KDTree.query(query_point, k)` — recursive descent with backtracking and branch pruning
-
-Key implementation notes to keep in mind:
-- Axis selection: splitting on the dimension with the highest spread (variance or range) tends to produce more balanced trees.
-- Pruning condition: prune a subtree if the distance from the query to the splitting hyperplane is greater than the current k-th best distance found.
-- Degrades toward brute-force as dimensionality increases — this is expected and part of what the experiments will quantify.
+- **Build:** splits on the axis of highest spread (range) at each level, placing the median point at the node. Recursive construction, left subtree gets points below the median, right gets points above.
+- **Query:** recursive descent with backtracking. Always visits the near side first. Only crosses to the far side if the distance to the splitting hyperplane is less than the current k-th best distance — otherwise prunes the subtree entirely.
+- Degrades toward brute-force at high dimensionality as expected; crossover observed around d=20 in experiments.
 
 ---
 
-## ANN (Early Termination k-D Tree) — TODO
+## ANN (Randomized k-d Tree Forest) — Implemented
 
-Need to add an `epsilon` parameter: stop backtracking once the best candidate is within `(1 + epsilon)` of the true nearest neighbor distance.
+Implemented in `src/ann/early_termination.py` as `ApproximateKDTree`.
 
-This is sometimes called a "defeatist" search — intentionally giving up on backtracking past a certain point. Simpler than graph-based ANN but still a useful baseline.
+Went with a **backtracking budget** rather than an epsilon parameter. At each node the algorithm descends the near side; the `backtracks` parameter controls how many times it is allowed to cross to the far side. bt=0 is a pure greedy DFS, bt=2 recovers most true neighbors at low-to-moderate dimensionality.
+
+Built as a forest of 20 randomized trees (candidate_axes=2). Each tree partitions the space differently by sampling a random subset of axes at each split rather than always picking the globally best one. Results from all trees are merged and deduplicated before returning the top k.
+
+Epsilon-based early termination (stop when best candidate is within (1 + ε) of the true NN) is still a viable future extension.
 
 ---
 
-## Experiments — Rough Plan
+## Experiments — Completed
 
-Generate synthetic datasets at d = 2, 5, 10, 20, 50, 100 dimensions.
-For each: measure brute-force query time, k-d tree query time, ANN query time, ANN recall@k.
+Results across three runs logged in `results_log.txt`. Tested d = 2, 5, 10, 20, 50, 100, 200 on 100,000-point synthetic clustered datasets, 50 queries per dimensionality, k=10.
 
-Hypothesis: k-d tree beats brute-force up to ~20 dimensions, then converges; ANN stays competitive throughout.
+Hypothesis held: k-d tree beats brute-force up to ~d=20, converges around d=50, and marginally exceeds brute-force at d=200. All ANN variants (bt=0,1,2) remain faster than both exact methods at every dimensionality tested. Accuracy drops sharply with dimension for bt=0; bt=2 holds up reasonably well through d=20.
