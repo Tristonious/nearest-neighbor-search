@@ -109,7 +109,7 @@ BACKTRACKS     = [0, 1, 2] # backtracking budgets to evaluate
 
 ## Note on AI Assistance
 
-The algorithm designs, implementations, experimental methodology, and analysis in this project are original work. Code structure and organization were refactored with the assistance of Claude (Anthropic). The original monolithic implementation is preserved in the project history.
+The original implementations for this project were developed as coursework. The code in this repository has been refactored with the assistance of Claude (Anthropic) for clarity, structure, and readability. The underlying algorithms, logic, benchmarking design, and analysis are my own work.
 
 ---
 
