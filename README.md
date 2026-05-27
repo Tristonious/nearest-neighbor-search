@@ -4,6 +4,13 @@
 
 Comparative implementation and benchmark of five k-nearest neighbor search algorithms across synthetic clustered datasets spanning d=2 to d=200 dimensions.
 
+## Note on Code Refactoring
+
+The original implementations for this project were developed as coursework. 
+The code in this repository has been refactored with the assistance of Claude 
+(Anthropic) for clarity, structure, and readability. The underlying algorithms, 
+logic, benchmarking design, and analysis are my own work.
+
 ---
 
 ## Algorithms
