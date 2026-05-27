@@ -1,15 +1,8 @@
-# nearest-neighbor-search
+# knn-comparison
 
 **Algorithmic Approaches to Efficient Nearest Neighbor Search in High-Dimensional Data**
 
 Comparative implementation and benchmark of five k-nearest neighbor search algorithms across synthetic clustered datasets spanning d=2 to d=200 dimensions.
-
-## Note on Code Refactoring
-
-The original implementations for this project were developed as coursework. 
-The code in this repository has been refactored with the assistance of Claude 
-(Anthropic) for clarity, structure, and readability. The underlying algorithms, 
-logic, benchmarking design, and analysis are my own work.
 
 ---
 
@@ -68,22 +61,25 @@ bt=2 achieves near-perfect accuracy at low dimensionalities while remaining ~6x 
 
 ```
 knn-comparison/
-├── knn_benchmark.py          ← all algorithm implementations, testing, and visualization
+├── run.py                    ← benchmark entry point
+├── src/
+│   ├── __init__.py           ← public API
+│   ├── brute_force.py        ← exact brute-force k-NN
+│   ├── kdtree.py             ← exact k-d tree (build + query)
+│   ├── utils.py              ← distance metrics, dataset generators, accuracy
+│   ├── viz.py                ← figure generation
+│   └── ann/
+│       ├── __init__.py
+│       └── early_termination.py  ← randomized forest ANN with backtracking
 ├── docs/
-│   └── knn_comparison_paper.pdf   ← full paper (ACM format)
-├── figures/                  ← output plots (committed)
+│   └── knn_comparison_paper.pdf
+├── figures/
 │   ├── fig1_runtime.png
 │   ├── fig2_memory.png
 │   ├── fig3_kdtree_partition.png
 │   └── fig4_forest_partitions.png
-├── results_log.txt           ← benchmark output across 3 runs
-├── DEVELOPMENT_NOTES.md      ← implementation notes and future work
-└── src/                      ← modular refactor (in progress)
-    ├── utils.py
-    ├── brute_force.py
-    ├── kdtree.py
-    └── ann/
-        └── early_termination.py
+├── results_log.txt
+└── DEVELOPMENT_NOTES.md
 ```
 
 ---
@@ -92,23 +88,28 @@ knn-comparison/
 
 ```bash
 pip install numpy matplotlib
-python knn_benchmark.py
+python run.py
 ```
 
 Runs all five algorithms across d=2,5,10,20,50,100,200, prints results to stdout and appends to `results_log.txt`, and saves figures to the working directory.
 
-Key parameters (set at top of `run_tests()`):
+Key parameters (top of `run.py`):
 
 ```python
-dimensions = [2, 5, 10, 20, 50, 100, 200]
-n_points   = 100_000   # dataset size
-n_queries  = 50        # queries per dimensionality
-k          = 10        # nearest neighbors
-# Forest hyperparameters:
-n_trees    = 20
-candidate_axes = 2
-backtracks = [0, 1, 2]
+DIMENSIONS     = [2, 5, 10, 20, 50, 100, 200]
+N_POINTS       = 100_000   # dataset size
+N_QUERIES      = 50        # queries per dimensionality
+K              = 10        # nearest neighbors
+N_TREES        = 20        # forest hyperparameter
+CANDIDATE_AXES = 2         # axes sampled per split
+BACKTRACKS     = [0, 1, 2] # backtracking budgets to evaluate
 ```
+
+---
+
+## Note on AI Assistance
+
+The algorithm designs, implementations, experimental methodology, and analysis in this project are original work. Code structure and organization were refactored with the assistance of Claude (Anthropic). The original monolithic implementation is preserved in the project history.
 
 ---
 
