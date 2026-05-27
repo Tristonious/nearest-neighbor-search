@@ -6,12 +6,6 @@ Comparative implementation and benchmark of five k-nearest neighbor search algor
 
 ---
 
-## Note on AI Assistance
-
-The original implementations for this project were developed as coursework. The code in this repository has been refactored with the assistance of Claude (Anthropic) for clarity, structure, and readability. The underlying algorithms, logic, benchmarking design, and analysis are my own work.
-
----
-
 ## Algorithms
 
 | Algorithm | Type | Complexity (query) |
@@ -113,10 +107,16 @@ BACKTRACKS     = [0, 1, 2] # backtracking budgets to evaluate
 
 ---
 
+## Note on AI Assistance
+
+The original implementations for this project were developed as coursework. The code in this repository has been refactored with the assistance of Claude (Anthropic) for clarity, structure, and readability. The underlying algorithms, logic, benchmarking design, and analysis are my own work.
+
+---
+
 ## Paper
 
 Full write-up including algorithm analysis, experimental methodology, and discussion:
-[`docs/knn_comparison_paper.pdf`](docs/knn_comparison_paper.pdf)
+[`docs/knn_comparison_paper.pdf`](docs/knn_comparison_paper.pdf?raw=true)
 
 ---
 
