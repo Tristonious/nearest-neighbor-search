@@ -2,8 +2,13 @@
 Brute-force k-nearest neighbor search.
 
 Guarantees exact results. Scales as O(n * d) per query — every point
-in the dataset is compared to the query. Useful as a correctness
-baseline and for small datasets.
+in the dataset is compared to the query. Used as the correctness
+baseline for accuracy evaluation of approximate methods.
+
+Sorting strategy: compute all distances, then sort with list.sort()
+(Timsort, O(n log n)). An alternative is heapq.nsmallest(k, distances)
+which runs in O(n log k) and is preferable when k << n, but Timsort is
+fast enough in practice for the dataset sizes used here.
 """
 
 from .utils import euclidean_distance
@@ -15,12 +20,12 @@ def bf_knn(dataset, query, k, distance_fn=euclidean_distance):
 
     Parameters
     ----------
-    dataset : list of tuple/list
-    query : tuple or list
+    dataset : list of list/tuple
+    query : list or tuple
     k : int
     distance_fn : callable, optional
         Defaults to euclidean_distance. Pass manhattan_distance for
-        high-dimensional data.
+        high-dimensional experiments.
 
     Returns
     -------

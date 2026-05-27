@@ -5,7 +5,7 @@ Public API. Import algorithms and utilities from here rather than
 reaching into submodules directly.
 
     from src import bf_knn, KDTree, ApproximateKDTree
-    from src import make_uniform, euclidean_distance
+    from src import make_clustered, compute_accuracy, euclidean_distance
 """
 
 from .brute_force import bf_knn
@@ -19,4 +19,5 @@ from .utils import (
     make_clustered,
     make_gaussian,
     DATASET_GENERATORS,
+    compute_accuracy,
 )
