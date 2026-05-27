@@ -6,6 +6,12 @@ Comparative implementation and benchmark of five k-nearest neighbor search algor
 
 ---
 
+## Note on AI Assistance
+
+The original implementations for this project were developed as coursework. The code in this repository has been refactored with the assistance of Claude (Anthropic) for clarity, structure, and readability. The underlying algorithms, logic, benchmarking design, and analysis are my own work.
+
+---
+
 ## Algorithms
 
 | Algorithm | Type | Complexity (query) |
@@ -104,12 +110,6 @@ N_TREES        = 20        # forest hyperparameter
 CANDIDATE_AXES = 2         # axes sampled per split
 BACKTRACKS     = [0, 1, 2] # backtracking budgets to evaluate
 ```
-
----
-
-## Note on AI Assistance
-
-The original implementations for this project were developed as coursework. The code in this repository has been refactored with the assistance of Claude (Anthropic) for clarity, structure, and readability. The underlying algorithms, logic, benchmarking design, and analysis are my own work.
 
 ---
 
