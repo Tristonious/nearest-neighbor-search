@@ -1,4 +1,4 @@
-# knn-comparison
+# nearest-neighbor-search
 
 **Algorithmic Approaches to Efficient Nearest Neighbor Search in High-Dimensional Data**
 
