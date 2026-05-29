@@ -115,8 +115,9 @@ The original implementations for this project were developed as coursework. The 
 
 ## Paper
 
+## Paper
 Full write-up including algorithm analysis, experimental methodology, and discussion:
-[`docs/knn_comparison_paper.pdf`](https://raw.githubusercontent.com/Tristonious/nearest-neighbor-search/main/docs/knn_comparison_paper.pdf)
+[`docs/knn_comparison_paper.pdf`](docs/knn_comparison_paper.pdf)
 
 ---
 
