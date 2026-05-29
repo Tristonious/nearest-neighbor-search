@@ -117,7 +117,7 @@ The original implementations for this project were developed as coursework. The 
 
 ## Paper
 Full write-up including algorithm analysis, experimental methodology, and discussion:
-[`docs/knn_comparison_paper.pdf`](docs/knn_comparison_paper.pdf)
+[`KNN Comparison Paper`](docs/knn_comparison_paper.pdf)
 
 ---
 
